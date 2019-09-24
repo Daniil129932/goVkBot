@@ -26,7 +26,7 @@ type Bot struct {
 	prefixList []string
 
 	commandHandlers map[string][]handlers.CommandHandler
-	handlers map[string][]handlers.EventHandler
+	handlers        map[string][]handlers.EventHandler
 }
 
 func createDecoder(output interface{}) (decoder *mapstructure.Decoder) {
@@ -38,17 +38,19 @@ func createDecoder(output interface{}) (decoder *mapstructure.Decoder) {
 	return
 }
 
+///test
+
 func CreateBot(groupId, token, version string) (b *Bot) {
 	b = &Bot{
 		groupId: groupId,
-		token: token,
-		logger: log.Create("[%s] %s"),
-		api: vk.Create(token, version),
+		token:   token,
+		logger:  log.Create("[%s] %s"),
+		api:     vk.Create(token, version),
 
 		prefixList: []string{".", "/"},
 
 		commandHandlers: map[string][]handlers.CommandHandler{},
-		handlers: map[string][]handlers.EventHandler{},
+		handlers:        map[string][]handlers.EventHandler{},
 	}
 
 	return
@@ -107,7 +109,7 @@ func (b *Bot) OnCommand(command string, h ...handlers.CommandHandler) {
 	b.commandHandlers[command] = append(b.commandHandlers[command], h...)
 }
 
-func (b *Bot) On(eventType string, h... handlers.EventHandler) {
+func (b *Bot) On(eventType string, h ...handlers.EventHandler) {
 	if !b.handlersExists(eventType) {
 		b.handlers[eventType] = make([]handlers.EventHandler, 0)
 	}
