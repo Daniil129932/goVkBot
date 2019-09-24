@@ -174,12 +174,11 @@ func (b *Bot) handle(updates []vk.LongPollUpdate) {
 
 				if b.commandExists("*") {
 					for _, handler := range b.commandHandlers["*"] {
-						if !b.commandExists(cmd) {
-							return
-						}
-						next = handler(args[1:], &event.Command{Command: args[0], Args: args[1:], PrivateMessage: &pm})
-						if !next {
-							break
+						if b.commandExists(cmd) {
+							next = handler(args[1:], &event.Command{Command: args[0], Args: args[1:], PrivateMessage: &pm})
+							if !next {
+								break
+							}
 						}
 					}
 				}
