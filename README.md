@@ -8,9 +8,9 @@ Example:
 package main
 
 import (
-	"github.com/AlexBrin/goVkBot"
-	"github.com/AlexBrin/goVkBot/event"
-	"github.com/AlexBrin/goVkBot/vk"
+	"github.com/Daniil129932/goVkBot"
+	"github.com/Daniil129932/goVkBot/event"
+	"github.com/Daniil129932/goVkBot/vk"
 )
 
 const (

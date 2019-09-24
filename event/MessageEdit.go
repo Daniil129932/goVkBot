@@ -1,7 +1,7 @@
 package event
 
 import (
-	"github.com/AlexBrin/goVkBot/vk/object"
+	"github.com/Daniil129932/goVkBot/vk/object"
 )
 
 type MessageEdit struct {
