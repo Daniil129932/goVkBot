@@ -164,7 +164,7 @@ func (b *Bot) handle(updates []vk.LongPollUpdate) {
 			_ = createDecoder(&pm).Decode(update.Object)
 
 			args := strings.Split(pm.Text, " ")
-			if len(args) >= 1 {
+			if len(args) >= 1 && args[0] != "" {
 				cmd := strings.ToLower(args[0])
 				if b.isPrefix(cmd) {
 					cmd = cmd[1:]
@@ -181,9 +181,6 @@ func (b *Bot) handle(updates []vk.LongPollUpdate) {
 					}
 				}
 
-//				if !next {
-//					return
-//				}
 
 				if b.commandExists(cmd) {
 					for _, handler := range b.commandHandlers[cmd] {
