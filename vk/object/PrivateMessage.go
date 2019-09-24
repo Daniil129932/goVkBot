@@ -33,6 +33,8 @@ type PrivateMessage struct {
 	UserID            float64           `json:"from_id" map:"from_id"`
 	Text              string            `json:"text" map:"text"`
 	RandomID          float64           `json:"random_id" map:"random_id"`
+	Ref               string            `json:"ref" map:"ref"`
+	RefSource         string            `json:"ref_source" map:"ref_source"`
 	Attachments       []*Attachment     `json:"attachments" map:"attachments"`
 	Important         bool              `json:"important" map:"important"`
 	Geo               *Geo              `json:"geo" map:"geo"`
