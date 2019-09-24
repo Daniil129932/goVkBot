@@ -171,6 +171,7 @@ func (b *Bot) handle(updates []vk.LongPollUpdate) {
 				}
 
 				var next bool
+
 				if b.commandExists("*") {
 					for _, handler := range b.commandHandlers["*"] {
 						next = handler(args[1:], &event.Command{Command: args[0], Args: args[1:], PrivateMessage: &pm})
@@ -180,9 +181,9 @@ func (b *Bot) handle(updates []vk.LongPollUpdate) {
 					}
 				}
 
-				if !next {
-					return
-				}
+//				if !next {
+//					return
+//				}
 
 				if b.commandExists(cmd) {
 					for _, handler := range b.commandHandlers[cmd] {
