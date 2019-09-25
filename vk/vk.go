@@ -167,3 +167,32 @@ func (api *API) request(method string, params map[string]interface{}) (resp *Res
 func (api *API) Api(method string, params H) (resp *Response, err error) {
 	return api.request(method, params)
 }
+
+
+func (api *API) ApiKey(method string, params H, key string) (resp *Response, err error) {
+	resp = &Response{}
+
+	params["access_token"] = key
+	params["v"] = api.version
+
+	url := fmt.Sprintf("https://api.vk.com/method/%s?%s", method, prepare(params))
+	response, err := http.Get(url)
+	if err != nil {
+		return nil, err
+	}
+	defer response.Body.Close()
+
+	body, err := ioutil.ReadAll(response.Body)
+	if err != nil {
+		return nil, err
+	}
+
+	err = json.Unmarshal(body, &resp.Raw)
+	if err != nil {
+		return nil, err
+	}
+	json.Unmarshal(body, resp)
+
+	return resp, nil
+}
+
