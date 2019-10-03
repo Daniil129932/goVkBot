@@ -141,6 +141,7 @@ func (b *Bot) SendMessage(message string, to float64, params vk.H) {
 	params["peer_id"] = to
 	params["message"] = template.URLQueryEscaper(message)
 	params["random_id"] = time.Now().UnixNano() + int64(to)
+	params["disable_mentions"] = 1
 
 	response, err := b.api.Api("messages.send", params)
 	if err != nil {
