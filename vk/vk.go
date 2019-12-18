@@ -83,7 +83,7 @@ func (api *API) Upload(uploadServer, filename, fieldName string, file *os.File) 
 	if file == nil {
 		log.Println("File is empty")
 		return UploadResponse{
-			Error: "no_file",
+			Error:            "no_file",
 			ErrorDescription: "File is empty",
 		}
 	}
@@ -102,7 +102,7 @@ func (api *API) Upload(uploadServer, filename, fieldName string, file *os.File) 
 	if err != nil {
 		log.Println(err)
 		return UploadResponse{
-			Error: "request_error",
+			Error:            "request_error",
 			ErrorDescription: err.Error(),
 		}
 	}
@@ -111,7 +111,7 @@ func (api *API) Upload(uploadServer, filename, fieldName string, file *os.File) 
 	if err != nil {
 		log.Println(err)
 		return UploadResponse{
-			Error: "read_error",
+			Error:            "read_error",
 			ErrorDescription: err.Error(),
 		}
 	}
@@ -120,20 +120,19 @@ func (api *API) Upload(uploadServer, filename, fieldName string, file *os.File) 
 	response := UploadResponse{}
 	json.Unmarshal(b, &response)
 	json.Unmarshal(b, &response.Response)
-return response
-	
+
 	apiResponse, err := api.request("docs.save", H{
 		"file": response.Response["file"],
 	})
 	if err != nil {
 		log.Println(err)
 		return UploadResponse{
-			Error: "request_error",
+			Error:            "request_error",
 			ErrorDescription: err.Error(),
 		}
 	}
-
-	response.Response = apiResponse.Raw["response"].(map[string]interface{})
+	fmt.Println(apiResponse.Raw["response"])
+	//	response.Response// = apiResponse.Raw["response"].(map[string]interface{})
 
 	return response
 }
@@ -169,7 +168,6 @@ func (api *API) Api(method string, params H) (resp *Response, err error) {
 	return api.request(method, params)
 }
 
-
 func (api *API) ApiKey(method string, params H, key string) (resp *Response, err error) {
 	resp = &Response{}
 
@@ -196,4 +194,3 @@ func (api *API) ApiKey(method string, params H, key string) (resp *Response, err
 
 	return resp, nil
 }
-

@@ -26,6 +26,25 @@ type MessageAction struct {
 }
 
 type PrivateMessage struct {
+	Message    *Message    `json:"message" map:"message"`
+	ClientInfo *ClientInfo `json:"client_info" map:"client_info"`
+}
+
+type ClientInfo struct {
+	//"button_actions": [
+	//　"text",
+	//　"vkpay",
+	//　"open_app",
+	//　"location",
+	//　"open_link"
+	//],
+	Keyboard       bool `json:"keyboard" map:"keyboard"`
+	InlineKeyboard bool `json:"inline_keyboard" map:"inline_keyboard"`
+	Carousel       bool `json:"carousel" map:"carousel"`
+	//"lang_id": 0
+}
+
+type Message struct {
 	ID                float64           `json:"id" map:"id"`
 	Date              float64           `json:"date" map:"date"`
 	PeerID            float64           `json:"peer_id" map:"peer_id"`
